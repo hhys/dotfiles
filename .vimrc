@@ -30,7 +30,7 @@ NeoBundle 'tomasr/molokai'               " colorscheme
 NeoBundle 'bronson/vim-trailing-whitespace' " 行末のスペース
 
 " FileType
-NeoBundle 'mrk21/yaml-vim'
+NeoBundle 'hhys/yaml-vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle '5t111111/neat-json.vim'       " JSON を整形して表示(:NeatJson)
