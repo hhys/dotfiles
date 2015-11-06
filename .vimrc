@@ -72,6 +72,9 @@ set showcmd
 set incsearch
 set hlsearch
 
+" 右端で折り返さない
+set nowrap
+
 " □とか○の文字があってもカーソル位置がずれないようにする
 if exists('&ambiwidth')
   set ambiwidth=double
