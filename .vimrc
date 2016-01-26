@@ -36,6 +36,7 @@ NeoBundle 'Keithbsmiley/rspec.vim'
 NeoBundle '5t111111/neat-json.vim'       " JSON を整形して表示(:NeatJson)
 NeoBundle 'elzr/vim-json'                " JSON filetype
 NeoBundle 'kchmck/vim-coffee-script'     " CoffeeScript
+NeoBundle 'evanmiller/nginx-vim-syntax'  " nginx.conf
 
 NeoBundle 'AndrewRadev/switch.vim'       " 例えば true を false に変換する
 
@@ -88,15 +89,23 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 " indent {{{
 set autoindent
 set smartindent
+set expandtab
 
-au BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.htm set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.php set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.rake set tabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.yml set tabstop=2 shiftwidth=2 expandtab
-au FileType ruby,eruby set tabstop=2 shiftwidth=2 expandtab
-au FileType javascript,coffee set tabstop=2 shiftwidth=2 expandtab
-au FileType css,scss set tabstop=2 shiftwidth=2 expandtab
+au BufNewFile,BufRead *.html set tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.htm set tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.php set tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.rake set tabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.yml set tabstop=2 shiftwidth=2
+" au BufNewFile,BufRead .htaccess,*/etc/httpd/*.conf		setf apachestyle
+" au BufNewFile,BufRead access.conf*,apache.conf*,apache2.conf*,httpd.conf*,srm.conf*	setf apachestyle
+" au BufNewFile,BufRead */etc/apache2/*.conf*,*/etc/httpd/conf.*/*,*/etc/httpd/mods-*/*,*/etc/httpd/sites-*/*,*/etc/httpd/conf.d/*.conf*,auth_mysql.conf*,auth_pgsql.conf*,ssl.conf*,perl.conf*,php.conf*,python.conf*,squirrelmail.conf*		setf apachestyle
+au FileType ruby,eruby set tabstop=2 shiftwidth=2
+au FileType javascript,coffee set tabstop=2 shiftwidth=2
+au FileType css,scss set tabstop=2 shiftwidth=2
+au FileType sql set tabstop=4 shiftwidth=4
+au FileType sh set tabstop=4 shiftwidth=4
+au FileType nginx set tabstop=4 shiftwidth=4
+au FileType apache set tabstop=4 shiftwidth=4
 " }}}
 
 " colorscheme {{{
@@ -237,13 +246,13 @@ endfunction
 " 入力モードで開始する
 " let g:unite_enable_start_insert=1
 " バッファ一覧
-noremap <C-U><C-B> :Unite buffer<CR>
+noremap <C-W><C-B> :Unite buffer<CR>
 " ファイル一覧
-noremap <C-U><C-F> :Unite -buffer-name=file file<CR>
+noremap <C-W><C-F> :Unite -buffer-name=file file<CR>
 " 最近使ったファイルの一覧
-noremap <C-U><C-R> :Unite file_mru<CR>
+noremap <C-W><C-R> :Unite file_mru<CR>
 " sourcesを「今開いているファイルのディレクトリ」とする
-noremap <C-U><C-D> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+noremap <C-W><C-D> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
@@ -269,14 +278,16 @@ nnoremap - :Switch<cr>
 " }}}
 
 " vim-indent-guides {{{
-" let g:indent_guides_enable_on_vim_startup=1
-" let g:indent_guides_start_level=2
-" let g:indent_guides_auto_colors=0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
-" let g:indent_guides_color_change_percent = 30
-" let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
 " }}}
+
+au BufRead,BufNewFile */nginx/conf.d/*.conf set ft=nginx
 
 filetype plugin indent on
 
